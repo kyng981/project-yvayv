@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f8f5ef">
   <meta name="description" content="One tiny check. One big birthday. A little surprise for a very special human.">
   <title>A very important birthday check ✳</title>
@@ -17,6 +17,10 @@
   --mint: #e9edcf;
   --lime: #d8ee87;
   --white: #fffef8;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
   font-family: Arial, Helvetica, sans-serif;
   color: var(--ink);
   background: var(--paper);
@@ -31,13 +35,13 @@ button:disabled { cursor: wait; }
 [hidden] { display: none !important; }
 h1, h2, p, figure { margin: 0; }
 .paper-grain { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .35; background-image: radial-gradient(#8d927e 0.6px, transparent 0.6px); background-size: 13px 13px; mask-image: linear-gradient(90deg,#000,transparent 30%,transparent 70%,#000); }
-.site-header { min-height: 85px; display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 20px 5%; border-bottom: 2px solid var(--ink); position: relative; z-index: 1; }
+.site-header { min-height: 85px; display: flex; align-items: center; justify-content: space-between; width: 100%; padding: max(20px, var(--safe-top)) max(5%, var(--safe-right)) 20px max(5%, var(--safe-left)); border-bottom: 2px solid var(--ink); position: relative; z-index: 1; }
 .brand { font-weight: 900; color: var(--ink); text-decoration: none; letter-spacing: -1.5px; font-size: 30px; display: flex; align-items: center; gap: 8px; }
 .brand-flower { font-size: 38px; line-height: 1; font-weight: 400; }
 .brand-dot { color: #b34862; margin-left: -8px; }
 .header-note { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink); background: var(--lime); border: 1.5px solid var(--ink); padding: 9px 13px; border-radius: 30px; font-weight: 700; }
 .status-dot { width: 7px; height: 7px; border-radius: 100%; background: var(--green); }
-main { flex: 1; width: 100%; padding: 38px 24px 38px; position: relative; }
+main { flex: 1; width: 100%; padding: 38px max(24px, var(--safe-right)) 38px max(24px, var(--safe-left)); position: relative; }
 .intro { text-align: center; }
 .eyebrow { font-size: 11px; letter-spacing: 1.2px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 9px; }
 .eyebrow span { font-size: 23px; }
@@ -45,9 +49,9 @@ h1 { font: 900 clamp(55px, 6.5vw, 92px)/.97 Arial, Helvetica, sans-serif; letter
 h1 em { font: italic 1.12em/.95 Georgia, 'Times New Roman', serif; color: var(--green); letter-spacing: -5px; position: relative; }
 .subtitle { font-size: 17px; line-height: 1.65; color: var(--muted); }
 .experience { position: relative; max-width: 680px; margin: 34px auto 0; }
-.margin-note { position: relative; width: fit-content; max-width: calc(100% - 24px); margin: 0 14px 18px auto; transform: rotate(2deg); font: italic 19px/1.3 Georgia, serif; color: #876e58; display: flex; align-items: center; gap: 10px; }
-.margin-note span { font-size: 30px; display: inline-block; }
-.card { background: var(--white); border: 2px solid var(--ink); border-radius: 16px; box-shadow: 7px 8px 0 var(--ink); overflow: hidden; animation: appear .35s ease; }
+.margin-note { margin: 0; font: italic 17px/1.25 Georgia, serif; color: #876e58; display: flex; align-items: center; gap: 6px; }
+.margin-note svg { flex: 0 0 32px; width: 32px; height: 24px; }
+.card { background: var(--white); border: 2px solid var(--ink); border-radius: 16px; box-shadow: 7px 8px 0 var(--ink); overflow: hidden; animation: appear .35s ease; scroll-margin-top: calc(var(--safe-top) + 14px); }
 .card-topline { display: flex; align-items: center; gap: 12px; padding: 16px 25px; border-bottom: 2px solid var(--ink); background: var(--lime); font-size: 11px; letter-spacing: .9px; font-weight: 800; }
 .card-topline > :last-child { margin-left: auto; }
 .mini-flower { font-size: 26px; line-height: 1; color: var(--green); }
@@ -60,7 +64,10 @@ h1 em { font: italic 1.12em/.95 Georgia, 'Times New Roman', serif; color: var(--
 h2 { font: 800 38px/1.08 Arial, Helvetica, sans-serif; letter-spacing: -1.4px; }
 .verify-content > p:first-of-type { color: var(--muted); font-size: 16px; margin-top: 12px; }
 .verification-sticker { position: absolute; top: 35px; right: 38px; background: var(--pink); border: 2px solid var(--ink); padding: 13px 10px; transform: rotate(9deg); font-size: 12px; line-height: 1.25; font-weight: 900; box-shadow: 3px 3px 0 var(--ink); text-align: center; }
-.captcha-button { margin-top: 26px; padding: 20px; min-height: 105px; border: 2px solid var(--ink); border-radius: 8px; background: #f1f2e9; display: flex; gap: 17px; align-items: center; width: 100%; color: var(--ink); text-align: left; box-shadow: 3px 3px 0 #bcc8ab; transition: background .15s; }
+.captcha-button { margin-top: 26px; padding: 20px; min-height: 120px; border: 2px solid var(--ink); border-radius: 8px; background: #f1f2e9; display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; gap: 17px; align-items: start; width: 100%; color: var(--ink); text-align: left; box-shadow: 3px 3px 0 #bcc8ab; transition: background .15s; }
+.captcha-copy { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.captcha-button .checkbox { margin-top: 2px; }
+.captcha-button .captcha-seal { align-self: center; }
 .captcha-button:hover { background: #e6edd5; }
 .checkbox { flex-shrink: 0; width: 38px; height: 38px; border: 2px solid var(--ink); border-radius: 4px; background: var(--white); display: grid; place-items: center; font-size: 30px; }
 .checkbox.loading { border: 3px solid #bfcca9; border-top-color: var(--green); border-radius: 50%; animation: spin .6s linear infinite; }
@@ -80,7 +87,7 @@ h2 { font: 800 38px/1.08 Arial, Helvetica, sans-serif; letter-spacing: -1.4px; }
 .step.done i { background: var(--lime); border-color: var(--ink); color: var(--ink); }
 .step-line { width: 33px; height: 1.5px; background: #bac4a7; }
 .under-note { text-align: center; font: italic 16px Georgia, serif; color: #7c806a; margin-top: 22px; }
-.site-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 5%; font-size: 11px; color: #7a806e; line-height: 1.6; position: relative; }
+.site-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px max(5%, var(--safe-right)) max(24px, var(--safe-bottom)) max(5%, var(--safe-left)); font-size: 11px; color: #7a806e; line-height: 1.6; position: relative; }
 .site-footer > span:last-child > span { font-size: 18px; color: #b7677d; margin-left: 8px; vertical-align: middle; }
 body[data-stage=question] .intro h1 { font-size: clamp(50px, 5.2vw, 72px); }
 .question-content { padding: 26px 32px 30px; }
@@ -170,15 +177,15 @@ body[data-hunting=true] .hunt-badge { display: block; position: fixed; z-index: 
 .wobble { animation: wobble .3s ease; }
 .gift-wiggle { animation: gift-wiggle .4s ease; }
 @media (max-width: 1050px) {
-  .margin-note { font-size: 18px; }
+  .margin-note { font-size: 17px; }
   .memory-layout { grid-template-columns: 340px 1fr; gap: 40px; }
 }
 @media (max-width: 650px) {
-  .site-header { min-height: 70px; padding: 16px 18px; }
+  .site-header { min-height: 70px; padding: max(16px, var(--safe-top)) max(18px, var(--safe-right)) 16px max(18px, var(--safe-left)); }
   .brand { font-size: 25px; }
   .brand-flower { font-size: 30px; }
   .header-note { font-size: 9px; padding: 7px 9px; }
-  main { padding: 28px 17px 30px; }
+  main { padding: 28px max(17px, var(--safe-right)) 30px max(17px, var(--safe-left)); }
   .eyebrow { font-size: 9px; letter-spacing: .9px; }
   .eyebrow span { font-size: 19px; }
   h1 { font-size: 59px; letter-spacing: -3px; margin: 23px 0 24px; }
@@ -186,7 +193,7 @@ body[data-hunting=true] .hunt-badge { display: block; position: fixed; z-index: 
   .subtitle { font-size: 15px; line-height: 1.6; max-width: 360px; margin: auto; }
   .subtitle br { display: none; }
   .experience { margin-top: 28px; }
-  .margin-note { font-size: 16px; margin-right: 10px; margin-bottom: 18px; }
+  .margin-note { font-size: 16px; }
   .card { border-radius: 12px; box-shadow: 5px 6px 0 var(--ink); }
   .card-topline { padding: 13px 14px; font-size: 8px; letter-spacing: .5px; gap: 8px; }
   .window-dots { gap: 4px; }
@@ -196,7 +203,7 @@ body[data-hunting=true] .hunt-badge { display: block; position: fixed; z-index: 
   h2 { font-size: 34px; }
   .verify-content > p:first-of-type { font-size: 14px; margin-top: 12px; }
   .verification-sticker { right: 18px; top: 29px; font-size: 9px; padding: 11px 7px; }
-  .captcha-button { padding: 17px 12px; gap: 11px; margin-top: 23px; min-height: 100px; }
+  .captcha-button { padding: 18px 12px; grid-template-columns: 31px minmax(0, 1fr) auto; gap: 10px; margin-top: 23px; min-height: 120px; }
   .checkbox { width: 31px; height: 31px; }
   .captcha-label { font-size: 17px; }
   .captcha-label small { font-size: 9px; max-width: 160px; line-height: 1.4; }
@@ -209,7 +216,7 @@ body[data-hunting=true] .hunt-badge { display: block; position: fixed; z-index: 
   .step-line { width: 20px; }
   .step i { width: 24px; height: 24px; font-size: 10px; }
   .under-note { font-size: 14px; line-height: 1.5; }
-  .site-footer { padding: 20px; flex-direction: column; gap: 5px; text-align: center; font-size: 9px; }
+  .site-footer { padding: 20px 20px max(20px, var(--safe-bottom)); flex-direction: column; gap: 5px; text-align: center; font-size: 9px; }
   body[data-stage=question] .intro h1 { font-size: 49px; }
   .question-content { padding: 22px 18px 25px; }
   .question-notice { font-size: 11px; }
@@ -233,7 +240,7 @@ body[data-hunting=true] .hunt-badge { display: block; position: fixed; z-index: 
   .gift-reaction strong { font-size: 24px; }
   body[data-hunting=true] .gift-reaction strong { font-size: 33px; }
   .gift-feedback { font-size: 14px; }
-  body[data-hunting=true] .hunt-badge { top: 16px; font-size: 10px; padding: 10px 12px; }
+  body[data-hunting=true] .hunt-badge { top: calc(var(--safe-top) + 12px); font-size: 10px; padding: 10px 12px; }
   .memory-layout { display: flex; flex-direction: column; gap: 48px; margin-top: 35px; align-items: center; }
   .polaroid { max-width: 360px; width: 90%; margin-top: 10px; padding: 12px 12px 22px; }
   .polaroid figcaption { font-size: 17px; }
@@ -242,6 +249,25 @@ body[data-hunting=true] .hunt-badge { display: block; position: fixed; z-index: 
   .letter-top > p { font-size: 15px; }
   .letter-end { padding-top: 45px; }
   .letter-end p { font-size: 26px; }
+}
+/* iPhone 12 Pro Max: 428 × 926 CSS pixels in portrait. */
+@media (min-width: 390px) and (max-width: 450px) and (orientation: portrait) {
+  .site-header { min-height: 64px; padding-bottom: 14px; }
+  main { padding-top: 22px; }
+  .intro h1 { font-size: 52px; letter-spacing: -2.5px; margin: 18px 0 20px; }
+  .intro h1 em { letter-spacing: -2.5px; }
+  .subtitle { line-height: 1.55; }
+  .experience { margin-top: 24px; }
+  .verify-content { padding: 22px 18px 16px; }
+  .verify-content h2 { font-size: 32px; }
+  .captcha-seal { font-size: 27px; }
+  .captcha-seal small { font-size: 5.5px; }
+  .answer { min-height: 60px; }
+}
+@media (max-width: 389px) {
+  .captcha-seal { display: none; }
+  .captcha-button { grid-template-columns: 31px minmax(0, 1fr); }
+  .margin-note { font-size: 15px; }
 }
 @media (max-width: 360px) {
   main { padding-right: 13px; padding-left: 13px; }
@@ -279,7 +305,6 @@ body[data-hunting=true] .hunt-badge { display: block; position: fixed; z-index: 
     </div>
 
     <div class="experience" id="experience">
-      <span class="margin-note" id="margin-note" aria-hidden="true">surely you can tick a box? <span>↘</span></span>
       <section class="card verify-card" id="verify-panel" aria-labelledby="verify-title">
         <div class="card-topline"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>EXTREMELY OFFICIAL BIRTHDAY CHECK</span><span class="tiny-lock" aria-hidden="true">✳︎</span></div>
         <div class="verify-content">
@@ -288,7 +313,7 @@ body[data-hunting=true] .hunt-badge { display: block; position: fixed; z-index: 
           <p>Just a quick little formality.</p>
           <button class="captcha-button" id="captcha-button" type="button">
             <span class="checkbox" id="checkbox" aria-hidden="true"></span>
-            <span class="captcha-label">Yes, I’m the birthday girl</span>
+            <span class="captcha-copy"><span class="margin-note" id="margin-note" aria-hidden="true"><svg viewBox="0 0 44 24" fill="none" focusable="false"><path d="M41 4C25 1 30 20 4 16M4 16l8-8M4 16l10 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>surely you can tick a box?</span></span><span class="captcha-label">Yes, I’m the birthday girl</span></span>
             <span class="captcha-seal" aria-hidden="true">✳<small>friendCAPTCHA</small></span>
           </button>
           <p class="captcha-feedback" id="captcha-feedback" role="status" aria-live="polite">One click and you’re in. Probably.</p>
@@ -411,14 +436,14 @@ $('captcha-button').addEventListener('click', () => {
     $('checkbox').textContent = '×';
     $('captcha-feedback').classList.add('error');
     if (attempts === 1) {
-      $('captcha-feedback').textContent = 'Verification failed. Please try again.';
+      $('captcha-feedback').textContent = 'Verification failed. Please click with more birthday energy.';
       $('verification-sticker').innerHTML = 'SYSTEM<br>CONFUSED.';
     } else if (attempts === 2) {
-      $('captcha-feedback').textContent = 'Hmm. Suspiciously human. Try again.';
+      $('captcha-feedback').textContent = 'Hmm. Our very serious system is having a moment.';
       $('verification-sticker').innerHTML = 'PROBABLY<br>HUMAN.';
     } else {
       $('page-heading').innerHTML = 'Okay, prove it.<br><em>We’ll wait.</em>';
-      $('subtitle').innerHTML = 'The verification system seems to be having a moment. <br>Let’s try a few questions instead.';
+      $('subtitle').innerHTML = 'Let’s try something a little more personal. <br>Three questions, then your surprise.';
       setProgress(1);
       showPanel('question-panel');
       renderQuestion();
@@ -454,6 +479,13 @@ function renderQuestion() {
     $('answers').append(button);
   });
   $('question-title').focus({ preventScroll: true });
+  revealPhonePanel('question-panel');
+}
+
+function revealPhonePanel(id) {
+  if (window.matchMedia('(max-width: 650px)').matches) {
+    $(id).scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+  }
 }
 
 function answerQuestion(button, index) {
@@ -484,6 +516,7 @@ $('next-question').addEventListener('click', () => {
     setProgress(2);
     $('under-note').textContent = 'Your friendship subscription has been renewed for another year. ♡';
     $('gift-button').focus({ preventScroll: true });
+    revealPhonePanel('gift-panel');
   }
 });
 
@@ -510,23 +543,38 @@ $('gift-button').addEventListener('click', () => {
   document.body.dataset.stage = 'letter';
   delete document.body.dataset.hunting;
   $('letter-title').focus({ preventScroll: true });
-  window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+  window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
   celebrate();
 });
 
 function placeEscapedGift() {
   const button = $('gift-button');
   const inset = window.innerWidth <= 650 ? 18 : 40;
-  const maxLeft = Math.max(inset, window.innerWidth - button.offsetWidth - inset);
-  const maxTop = Math.max(inset, window.innerHeight - button.offsetHeight - inset);
-  button.style.left = `${giftEscapes === 1 ? maxLeft : inset}px`;
-  button.style.top = `${giftEscapes === 1 ? maxTop : Math.min(110, maxTop)}px`;
+  const viewport = window.visualViewport;
+  const width = viewport ? viewport.width : window.innerWidth;
+  const height = viewport ? viewport.height : window.innerHeight;
+  const left = viewport ? viewport.offsetLeft : 0;
+  const top = viewport ? viewport.offsetTop : 0;
+  const rootStyle = getComputedStyle(document.documentElement);
+  const safe = (edge) => parseFloat(rootStyle.getPropertyValue(`--safe-${edge}`)) || 0;
+  const minLeft = left + inset + safe('left');
+  const minTop = top + inset + safe('top');
+  button.style.maxWidth = `${Math.max(0, width - 2 * inset - safe('left') - safe('right'))}px`;
+  const maxLeft = Math.max(minLeft, left + width - button.offsetWidth - inset - safe('right'));
+  const maxTop = Math.max(minTop, top + height - button.offsetHeight - inset - safe('bottom'));
+  button.style.left = `${giftEscapes === 1 ? maxLeft : minLeft}px`;
+  button.style.top = `${giftEscapes === 1 ? maxTop : Math.min(Math.max(top + 110, minTop), maxTop)}px`;
   button.style.transform = `rotate(${giftEscapes === 1 ? -3 : 2}deg)`;
 }
 
-window.addEventListener('resize', () => {
+function refreshEscapedGift() {
   if (giftEscapes > 0 && !$('gift-panel').hidden) placeEscapedGift();
-});
+}
+window.addEventListener('resize', refreshEscapedGift);
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', refreshEscapedGift);
+  window.visualViewport.addEventListener('scroll', refreshEscapedGift);
+}
 
 const memoryImage = $('memory-image');
 function showMemory() {
